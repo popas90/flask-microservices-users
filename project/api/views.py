@@ -53,7 +53,7 @@ def get_single_user(user_id):
 
 
 @users_blueprint.route('/users', methods=['POST'])
-@cross_origin()
+@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
 def add_user():
     post_data = request.get_json()
     if not post_data:
