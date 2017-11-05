@@ -15,7 +15,7 @@ def create_app():
 
     # enable CORS
     # CORS(app)
-    CORS(app, resources={r"/users": {"origins": "http://localhost:port"}})
+    CORS(app, resources={r"/users": {"origins": "http://localhost:3000"}})
 
     # set config
     app_settings = os.getenv('APP_SETTINGS')
