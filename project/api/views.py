@@ -90,6 +90,7 @@ def add_user():
 
 
 @users_blueprint.route('/users', methods=['GET'])
+@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
 def get_all_users():
     """Get all users"""
     users = User.query.all()
