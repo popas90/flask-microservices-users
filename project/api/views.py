@@ -6,7 +6,6 @@ from flask_cors import cross_origin, CORS
 
 
 users_blueprint = Blueprint('users', __name__, template_folder='./templates')
-users_blueprint.config['CORS_HEADERS'] = 'Content-Type'
 CORS(users_blueprint, resources={r"/users": {"origins": "http://localhost:3000"}})
 
 
