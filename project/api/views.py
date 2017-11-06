@@ -6,6 +6,7 @@ from flask_cors import cross_origin, CORS
 
 
 users_blueprint = Blueprint('users', __name__, template_folder='./templates')
+users_blueprint.config['CORS_HEADERS'] = 'Content-Type'
 CORS(users_blueprint, resources={r"/users": {"origins": "http://localhost:3000"}})
 
 
@@ -54,7 +55,7 @@ def get_single_user(user_id):
 
 
 @users_blueprint.route('/users', methods=['POST'])
-@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
+@cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
 def add_user():
     post_data = request.get_json()
     if not post_data:
@@ -91,7 +92,7 @@ def add_user():
 
 
 @users_blueprint.route('/users', methods=['GET'])
-@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
+@cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
 def get_all_users():
     """Get all users"""
     users = User.query.all()
