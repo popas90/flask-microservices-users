@@ -112,3 +112,11 @@ def get_all_users():
         }
     }
     return jsonify(response_object), 200
+
+
+@users_blueprint.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
