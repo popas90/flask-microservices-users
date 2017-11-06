@@ -6,7 +6,7 @@ from flask_cors import cross_origin, CORS
 
 
 users_blueprint = Blueprint('users', __name__, template_folder='./templates')
-CORS(users_blueprint)
+CORS(users_blueprint, resources={r"/users": {"origins": "http://localhost:3000"}})
 
 
 @users_blueprint.route('/', methods=['GET', 'POST'])

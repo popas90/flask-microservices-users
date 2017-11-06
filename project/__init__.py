@@ -14,7 +14,7 @@ def create_app():
     app = Flask(__name__)
 
     # enable CORS
-    CORS(app)
+    # CORS(app)
     # CORS(app, resources={r"/users": {"origins": "http://localhost:3000"}})
 
     # set config
