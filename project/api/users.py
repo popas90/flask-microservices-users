@@ -3,6 +3,8 @@ from project.api.models import User
 from project import db
 from sqlalchemy import exc
 from flask_cors import cross_origin, CORS
+from project.api.utils import authenticate
+from project.api.utils import is_admin
 
 
 users_blueprint = Blueprint('users', __name__, template_folder='./templates')
@@ -44,7 +46,14 @@ def get_single_user(user_id):
 
 @users_blueprint.route('/users', methods=['POST'])
 @cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
-def add_user():
+@authenticate
+def add_user(resp):
+    if not is_admin(resp):
+        response_object = {
+            'status': 'error',
+            'message': 'You do not have permission to do that.'
+        }
+        return jsonify(response_object), 401
     post_data = request.get_json()
     if not post_data:
         response_object = {
@@ -78,7 +87,7 @@ def add_user():
         db.session.rollback()
         response_object = {
             'status': 'fail',
-            'message': 'Invalid payload.'
+            'message': 'Invalid payload.Failed to add to db.'
         }
         return jsonify(response_object), 400
 
